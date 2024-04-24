@@ -1,5 +1,5 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { logoutAction, useAuth } from "../auth"
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useAuth } from "../auth"
 import { LoginForm, ProtectedRoute, SignUpForm } from "../components"
 import {  HomePage } from "../pages"
 
@@ -7,6 +7,7 @@ import {  HomePage } from "../pages"
 const Routes = () => {
 
   const authContext = useAuth();
+  console.log(authContext?.session)
 
   const routesForAuthenticatedOnly = [
     {
@@ -16,10 +17,6 @@ const Routes = () => {
         {
           path: "",
           element: <HomePage />
-        },
-        {
-          path: "/logout",
-          action: logoutAction,
         },
       ]
     },

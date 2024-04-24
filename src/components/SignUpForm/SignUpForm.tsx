@@ -1,44 +1,60 @@
-import { Form, Link, useActionData, useNavigation } from "react-router-dom"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../../auth"
 
 
 export const SignUpForm = () => {
 
-  let navigation = useNavigation();
-  let isLoggingIn = navigation.formData != null;
+  const [username, setUsername] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const authContext = useAuth();
+  const navigate = useNavigate();
 
-  let actionData = useActionData() as { error: string } | undefined;
+  const handleSignup = async(event: React.FormEvent<HTMLFormElement>) => { 
+    event.preventDefault();
+
+    try {
+
+      if (authContext) {
+        await authContext.signup(username, email, password);
+        navigate('/', { replace: true })
+      }
+
+    } catch (error) {
+
+      return {
+        error: "Invalid signup attempt",
+      };
+
+    }
+   }
 
   return (
     <div>
-      <Form method="post" replace>
+      <form onSubmit={handleSignup}>
 
         <div className="form-control">
           <label htmlFor="username">Nombre de usuario</label>
-          <input type="text" name="username" id="username" />
+          <input type="text" value={username} id="username" onChange={(event) => setUsername(event.currentTarget.value)} />
         </div>
         <div className="form-control">
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" />
+          <input type="email" value={email} id="email" onChange={(event) => setEmail(event.currentTarget.value)} />
         </div>
 
         <div className="form-control">
           <label htmlFor="password">Contraseña</label>
-          <input type="password" name="password" id="password" />
+          <input type="password" value={password} id="password" onChange={(event) => setPassword(event.currentTarget.value)} />
         </div>
 
-        <button type="submit" disabled={isLoggingIn}>
-          { isLoggingIn ? "Procesando..." : "Registrarse" }
+        <button type="submit">
+          Registrarse
         </button>
 
-        {
-          actionData && actionData.error ? (
-            <p style={{ color: "red" }}>{actionData.error}</p>
-          ) : null
-        }
+      </form>
 
-      </Form>
-
-      <p>¿Ya tienes cuenta? <Link to={'/'}>Inicia sesión</Link></p>
+      <p>¿Ya tienes cuenta? <Link to={'/login'}>Inicia sesión</Link></p>
     </div>
   )
 }

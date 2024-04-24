@@ -1,20 +1,28 @@
-import { useFetcher } from "react-router-dom"
+import { redirect } from "react-router-dom"
+import { useAuth } from "../../auth";
 
 
 export const AuthStatus = () => {
 
-    let fetcher = useFetcher();
+  const authContext = useAuth()
 
-    let isLoggingOut = fetcher.formData != null;
+  console.log(authContext?.session)
+    
+    const handleLogout = async() => { 
+      
+      await authContext?.signout();
+      return redirect("/"); 
+
+     }
+
+    
 
   return (
     <div>
-        <p>Bienvenido</p>
-        <fetcher.Form method="post" action="/logout">
-        <button type="submit" disabled={isLoggingOut}>
-          {isLoggingOut ? "Procesando..." : "Cerrar sesión"}
+        <p>Bienvenido { authContext?.session?.user.email }</p>
+        <button type="submit" onClick={handleLogout} >
+          Cerrar sesion
         </button>
-      </fetcher.Form>
     </div>
   )
 }

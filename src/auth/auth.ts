@@ -1,6 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import { useAuth } from './authProvider';
-import { useNavigate } from 'react-router-dom';
 
 interface AuthProvider {
   isAuthenticated: boolean;
@@ -12,8 +10,6 @@ interface AuthProvider {
 }
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY)
-const authContext = useAuth();
-const navigate = useNavigate();
 
 /**
  * This represents some generic auth provider API, like Firebase.

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
-import { fakeAuthProvider, useAuth } from "../../auth";
+import { useAuth } from "../../auth";
 
 
 export const LoginForm = () => {
@@ -8,33 +8,28 @@ export const LoginForm = () => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const navigate = useNavigate();
   const authContext = useAuth();
+  const navigate = useNavigate();
 
-  const handleLoging = async ( event: React.FormEvent<HTMLFormElement>) => {
-    
+  const handleLoging = async (event: React.FormEvent<HTMLFormElement>) => {
+
     event.preventDefault();
-    
-    try {
-      await fakeAuthProvider.signin(email, password);
 
-      // if (authContext?.session) {
-      //   authContext.updateSession()
-      //   .then( () => {
-      //     navigate("/", { replace: true });
-      //   } )
-      // }
+    try {
+
+      if (authContext) {
+        await authContext.signin(email, password);
+        navigate('/', { replace: true })
+      }
 
     } catch (error) {
-      // Unused as of now but this is how you would handle invalid
-      // username/password combinations - just like validating the inputs
-      // above
+
       return {
         error: "Invalid login attempt",
       };
+
     }
 
-    
   }
 
   return (
