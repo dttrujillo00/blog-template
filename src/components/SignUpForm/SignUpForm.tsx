@@ -1,4 +1,4 @@
-import { Form, useActionData, useNavigation } from "react-router-dom"
+import { Form, Link, useActionData, useNavigation } from "react-router-dom"
 
 
 export const SignUpForm = () => {
@@ -37,6 +37,8 @@ export const SignUpForm = () => {
         }
 
       </Form>
+
+      <p>¿Ya tienes cuenta? <Link to={'/'}>Inicia sesión</Link></p>
     </div>
   )
 }

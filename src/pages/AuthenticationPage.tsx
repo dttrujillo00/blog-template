@@ -5,11 +5,12 @@ import { LoginForm, SignUpForm } from "../components";
 export const AuthenticationPage = () => {
 
   let { pathname } = useLocation();
+  console.log(pathname)
 
   return (
     <div>
       {
-        pathname.includes('login') ? <LoginForm /> : <SignUpForm />
+        pathname.includes('signup') ? <SignUpForm /> : <LoginForm />
       }
     </div>
   )

@@ -1,11 +1,15 @@
-import { LoaderFunctionArgs, redirect } from "react-router-dom";
+import { LoaderFunctionArgs, useNavigate } from "react-router-dom";
 import { fakeAuthProvider } from "./auth";
+import { useAuth } from "./authProvider";
 
 export const loginAction = async ({ request }: LoaderFunctionArgs) => {
 
     let formData = await request.formData();
     let email = formData.get('email') as string | null;
     let password = formData.get('password') as string | null;
+
+    const navigate = useNavigate();
+    const authContext = useAuth();
 
     if (!email || !password) {
         return {
@@ -25,7 +29,12 @@ export const loginAction = async ({ request }: LoaderFunctionArgs) => {
         };
     }
 
-    let redirectTo = formData.get("redirectTo") as string | null;
-    return redirect(redirectTo || "/");
+    if (authContext) {
+        authContext.updateSession()
+        navigate('/', { replace: true })
+    }
+
+    // let redirectTo = formData.get("redirectTo") as string | null;
+    // return redirect(redirectTo || "/");
 
 }

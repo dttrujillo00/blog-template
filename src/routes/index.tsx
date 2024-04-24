@@ -1,23 +1,52 @@
-import { protectedLoader } from "../auth"
-import { ProtectedRoute } from "../components"
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { logoutAction, useAuth } from "../auth"
+import { LoginForm, ProtectedRoute, SignUpForm } from "../components"
+import {  HomePage } from "../pages"
 
 
 const Routes = () => {
 
-    const routesForAuthenticatedOnly = [
+  const authContext = useAuth();
+
+  const routesForAuthenticatedOnly = [
+    {
+      path: "/",
+      element: <ProtectedRoute />,
+      children: [
         {
-            path: "/",
-            loader: protectedLoader,
-            element: <ProtectedRoute />,
-          },
-          {
-            path: "/logout",
-            action: logoutAction,
-          },
-    ]
+          path: "",
+          element: <HomePage />
+        },
+        {
+          path: "/logout",
+          action: logoutAction,
+        },
+      ]
+    },
+  ];
+
+  const routesForNotAuthenticatedOnly = [
+    {
+      path: '/',
+      element: <HomePage />,
+    },
+    {
+      path: 'login',
+      element: <LoginForm />
+    },
+    {
+      path: 'signup',
+      element: <SignUpForm />
+    },
+  ];
+
+  const router = createBrowserRouter([
+    ...(!authContext?.session ? routesForNotAuthenticatedOnly : []),
+    ...routesForAuthenticatedOnly,
+  ])
 
   return (
-    <div>Routes</div>
+    <RouterProvider router={router} />
   )
 }
 
