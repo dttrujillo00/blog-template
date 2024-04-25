@@ -5,8 +5,6 @@ import { useAuth } from "../../auth";
 export const AuthStatus = () => {
 
   const authContext = useAuth()
-
-  console.log(authContext?.session)
     
     const handleLogout = async() => { 
       

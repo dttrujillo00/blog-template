@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { useAuth } from "../auth"
 import { LoginForm, ProtectedRoute, SignUpForm } from "../components"
 import {  HomePage } from "../pages"
@@ -7,7 +7,6 @@ import {  HomePage } from "../pages"
 const Routes = () => {
 
   const authContext = useAuth();
-  console.log(authContext?.session)
 
   const routesForAuthenticatedOnly = [
     {
@@ -20,12 +19,16 @@ const Routes = () => {
         },
       ]
     },
+    {
+      path: '*',
+      element: <Navigate to={'/'} />,
+    }
   ];
 
   const routesForNotAuthenticatedOnly = [
     {
       path: '/',
-      element: <HomePage />,
+      element: <Navigate to={'/login'} />,
     },
     {
       path: 'login',
@@ -35,6 +38,10 @@ const Routes = () => {
       path: 'signup',
       element: <SignUpForm />
     },
+    {
+      path: '*',
+      element: <Navigate to={'/login'} />,
+    }
   ];
 
   const router = createBrowserRouter([
@@ -47,4 +54,4 @@ const Routes = () => {
   )
 }
 
-export default Routes
+export default Routes;

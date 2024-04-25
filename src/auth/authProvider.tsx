@@ -36,6 +36,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             });
     }
 
+    // Inicia session y actualiza la session en la aplicacion
     const signin = async (email: string, password: string) => {
 
         await supabase.auth.signInWithPassword({
@@ -45,11 +46,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         updateSession()
     }
 
+    // Cierra la session y actualiza la session en la aplicacion
     const signout = async () => { 
         await supabase.auth.signOut()
         updateSession();
      }
 
+    //  Registra un nuevo usuario y actualiza la session en la aplicacion
      const signup = async(username: string, email: string, password: string) => { 
         await supabase.auth.signUp({
             email,
