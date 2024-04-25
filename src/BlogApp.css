@@ -6,7 +6,7 @@
 }
 
 :root {
-    --height-btn-add-article: 100px;
+    --height-article-card: 200px;
     --main-color: rgb(20, 20, 80);
     --bg-add-card: rgba(194, 239, 239, 0.3);
     --border-radius: .2rem;
@@ -16,6 +16,30 @@
     background-color: var(--main-color);
 }
 
+.height-article-card {
+    height: var(--height-article-card);
+}
+
+h2 {
+    margin: 1rem;
+}
+
+.flex-30 {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+
 .flex-50 {
     flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.flex-70 {
+    flex: 0 0 70%;
+    max-width: 70%;
+}
+
+.flex-100 {
+    flex: 0 0 100%;
+    max-width: 100%;
 }

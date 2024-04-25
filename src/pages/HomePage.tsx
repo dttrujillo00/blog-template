@@ -1,7 +1,5 @@
-import { AddArticleBtn, AuthStatus, Box, Logo } from "../components"
+import { AddArticleBtn, ArticleCard, AuthStatus, Box, Logo } from "../components"
 import './HomePage.css'
-
-
 
 export const HomePage = () => {
 
@@ -17,23 +15,24 @@ export const HomePage = () => {
 
       <Box>
         <div className="articles-container">
-          <Box className="flex-50">
+          <Box className="flex-100 height-article-card">
             <AddArticleBtn />
           </Box>
-          <Box className="flex-50">
-            <AddArticleBtn />
+          <h2>Úlitmas publicaciones</h2>
+          <Box className="flex-100 height-article-card">
+            <ArticleCard />
           </Box>
-          <Box className="flex-50">
-            <AddArticleBtn />
+          <Box className="flex-100 height-article-card">
+            <ArticleCard />
           </Box>
-          <Box className="flex-50">
-            <AddArticleBtn />
+          <Box className="flex-100 height-article-card">
+            <ArticleCard />
           </Box>
-          <Box className="flex-50">
-            <AddArticleBtn />
+          <Box className="flex-100 height-article-card">
+            <ArticleCard />
           </Box>
-          <Box className="flex-50">
-            <AddArticleBtn />
+          <Box className="flex-100 height-article-card">
+            <ArticleCard />
           </Box>
         </div>
       </Box>
