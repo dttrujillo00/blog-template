@@ -4,9 +4,9 @@ import { useAuth } from "../../auth"
 
 export const ProtectedRoute = () => {
 
-    const session = useAuth();
+    const authContext = useAuth();
 
-    if (!session) {
+    if (!authContext?.session) {
         return <Navigate to={'/login'} />;
     }
 

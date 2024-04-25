@@ -4,3 +4,18 @@
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
 }
+
+:root {
+    --height-btn-add-article: 100px;
+    --main-color: rgb(20, 20, 80);
+    --bg-add-card: rgba(194, 239, 239, 0.3);
+    --border-radius: .2rem;
+}
+
+.bg-main-color {
+    background-color: var(--main-color);
+}
+
+.flex-50 {
+    flex: 0 0 50%;
+}

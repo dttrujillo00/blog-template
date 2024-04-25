@@ -1,25 +1,44 @@
-import { Link } from "react-router-dom";
-import { useAuth } from "../auth"
-import { AuthStatus } from "../components"
+import { AddArticleBtn, AuthStatus, Box, Logo } from "../components"
+import './HomePage.css'
 
 
 
 export const HomePage = () => {
 
-  const authContext = useAuth();
+  return (
+    <div>
+      <Box className="bg-main-color">
+        <header className="header">
+          <Logo />
 
-  if (authContext?.session) {
-    return (
-      <div>
-        <h1>Home Page</h1>
+          <AuthStatus />
+        </header>
+      </Box>
 
-        <AuthStatus />
-      </div>
-    )
-  } else {
-    return (
-      <Link to={'/login'}>Iniciar sesion</Link>
-    )
-  }
+      <Box>
+        <div className="articles-container">
+          <Box className="flex-50">
+            <AddArticleBtn />
+          </Box>
+          <Box className="flex-50">
+            <AddArticleBtn />
+          </Box>
+          <Box className="flex-50">
+            <AddArticleBtn />
+          </Box>
+          <Box className="flex-50">
+            <AddArticleBtn />
+          </Box>
+          <Box className="flex-50">
+            <AddArticleBtn />
+          </Box>
+          <Box className="flex-50">
+            <AddArticleBtn />
+          </Box>
+        </div>
+      </Box>
+
+    </div>
+  )
 
 }

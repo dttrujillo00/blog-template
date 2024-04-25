@@ -1,0 +1,23 @@
+
+
+.btn-add-article {
+    width: 100%;
+    height: var(--height-btn-add-article);
+    border-style: dashed;
+    border-color: var(--main-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-add-card);
+    color: var(--main-color);
+}
+
+.btn-add-article:hover {
+    border-style: solid;
+    transition: all .3s;
+    transform: scale(.9);
+    cursor: pointer;
+}
+
+.btn-add-article:hover svg {
+    transform: scale(1.5);
+    transition: all .3s;
+}

@@ -1,0 +1,18 @@
+
+
+.box-user {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .5rem;
+}
+
+.btn-logout {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
