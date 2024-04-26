@@ -1,0 +1,76 @@
+
+
+.screen-cover {
+    background-color: rgba(0, 0, 0, .5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-add-article {
+    background-color: var(--main-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    transform: scale(0);
+    animation: zoom-in .2s ease-in forwards;
+}
+
+.form-add-article h3 {
+    margin-bottom: 1rem;
+}
+
+.form-add-article .form-control {
+    margin-bottom: 1rem;
+}
+
+.form-add-article .form-control input,
+.form-add-article .form-control textarea {
+    width: 100%;
+    padding: .2rem .5rem;
+    border-radius: var(--border-radius);
+    border: none;
+}
+
+.form-add-article .form-control input::placeholder,
+.form-add-article .form-control textarea::placeholder {
+    font-style: italic;
+}
+
+.form-add-article .form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.form-actions button {
+    padding: .2rem .4rem;
+    background-color: transparent;
+    border: none;
+    color: inherit;
+}
+
+.form-actions button:last-child {
+    background-color: white;
+    color: var(--main-color);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+}
+
+@keyframes zoom-in {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

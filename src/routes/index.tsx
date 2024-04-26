@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { useAuth } from "../auth"
 import { LoginForm, ProtectedRoute, SignUpForm } from "../components"
-import {  HomePage } from "../pages"
+import {  EditArticlePage, HomePage } from "../pages"
 
 
 const Routes = () => {
@@ -16,6 +16,10 @@ const Routes = () => {
         {
           path: "",
           element: <HomePage />
+        },
+        {
+          path: "edit-article/:article_id",
+          element: <EditArticlePage />
         },
       ]
     },
