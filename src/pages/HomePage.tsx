@@ -1,6 +1,6 @@
 import { Session } from "@supabase/supabase-js";
 import { useAuth } from "../auth";
-import { ArticleCard, AuthStatus, Box, FormAddArticle, Logo } from "../components"
+import { ArticleCard, AuthStatus, Box, FormAddArticle, LoadingAlert, Logo } from "../components"
 import { articles } from "../data/articles"
 import { ArticlesCollection } from "../lib/definitions";
 import './HomePage.css'
@@ -13,7 +13,8 @@ let session: Session | null;
 export const HomePage = () => {
 
   const authContext = useAuth();
-  const [showAddModal, setShowAddModal] = useState<boolean>(false)
+  const [showAddModal, setShowAddModal] = useState<boolean>(false);
+  const [alertContent, setAlertContent] = useState<string>("")
 
   if (authContext) {
     session = authContext.session;
@@ -39,7 +40,7 @@ export const HomePage = () => {
             <button onClick={handleAddArticle} className='btn-add-article'>
               <IoAdd size={24} />
             </button>
-            <FormAddArticle showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
+            <FormAddArticle showAddModal={showAddModal} setShowAddModal={setShowAddModal} setAlertContent={setAlertContent} />
           </Box>
           <h2>Úlitmas publicaciones</h2>
           {
@@ -52,7 +53,7 @@ export const HomePage = () => {
         </div>
       </Box>
 
-      
+      <LoadingAlert content={alertContent} />
 
     </div>
   )

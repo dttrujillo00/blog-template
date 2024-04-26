@@ -4,18 +4,19 @@ import './FormAddArticle.css'
 interface FormAddArticleProps {
     showAddModal: boolean;
     setShowAddModal: React.Dispatch<React.SetStateAction<boolean>>
+    setAlertContent: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const FormAddArticle = ({ showAddModal, setShowAddModal }: FormAddArticleProps) => {
+export const FormAddArticle = ({ showAddModal, setShowAddModal, setAlertContent }: FormAddArticleProps) => {
 
     const navigate = useNavigate()
     
     const handleAddArticle = (event: React.FormEvent<HTMLFormElement>) => { 
         event.preventDefault()
-        console.log('adding')
+        setAlertContent("Creando artículo")
         
         setTimeout(() => {
-            console.log('added')
+            setAlertContent("");
             navigate('/edit-article/1')
         }, 2000);
      }

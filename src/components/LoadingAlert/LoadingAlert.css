@@ -1,0 +1,33 @@
+.loading-alert {
+    position: fixed;
+    bottom: 4rem;
+    right: 1.8rem;
+    z-index: 10;
+    background-color: var(--main-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    border-radius: var(--border-radius);
+    gap: 1rem;
+}
+
+.loading-spinner {
+    border: 3px solid transparent;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
