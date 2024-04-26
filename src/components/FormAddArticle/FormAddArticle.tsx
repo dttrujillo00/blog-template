@@ -39,7 +39,7 @@ export const FormAddArticle = ({ showAddModal, setShowAddModal, setAlertContent 
                         <button onClick={ () => setShowAddModal(false) }>
                             Cancelar
                         </button>
-                        <button type='submit'>
+                        <button type='submit' className='submit'>
                             Agregar
                         </button>
                     </div>

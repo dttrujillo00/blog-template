@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { useAuth } from "../auth"
 import { LoginForm, ProtectedRoute, SignUpForm } from "../components"
-import {  EditArticlePage, HomePage } from "../pages"
+import { EditArticlePage, HomePage, NotAuthenticated } from "../pages"
 
 
 const Routes = () => {
@@ -32,15 +32,17 @@ const Routes = () => {
   const routesForNotAuthenticatedOnly = [
     {
       path: '/',
-      element: <Navigate to={'/login'} />,
-    },
-    {
-      path: 'login',
-      element: <LoginForm />
-    },
-    {
-      path: 'signup',
-      element: <SignUpForm />
+      element: <NotAuthenticated />,
+      children: [
+        {
+          path: 'login',
+          element: <LoginForm />
+        },
+        {
+          path: 'signup',
+          element: <SignUpForm />
+        },
+      ]
     },
     {
       path: '*',

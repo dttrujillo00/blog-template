@@ -21,12 +21,18 @@
 }
 
 h2 {
-    margin: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
 input:focus,
 textarea:focus {
     outline: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration-color: rgb(145, 159, 237);
 }
 
 .flex-30 {
@@ -47,4 +53,67 @@ textarea:focus {
 .flex-100 {
     flex: 0 0 100%;
     max-width: 100%;
+}
+
+.form-control,
+.form-action {
+    margin-bottom: 1rem;
+}
+
+.form-control input,
+.form-control textarea {
+    width: 100%;
+    padding: .2rem .5rem;
+    border-radius: var(--border-radius);
+    border: none;
+    display: block;
+    margin: 0 auto;
+}
+
+.form-control input::placeholder,
+.form-control textarea::placeholder {
+    font-style: italic;
+}
+
+.form-control.input-password {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: black;
+    padding-right: .5rem;
+    border-radius: var(--border-radius);
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+button.submit {
+    background-color: white !important;
+    color: var(--main-color) !important;
+    border-radius: var(--border-radius) !important;
+    font-weight: bold !important;
+}
+
+/* Auth Page */
+.auth-page {
+    background-color: rgb(145, 159, 237);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-form {
+    background-color: var(--main-color);
+    color: white;
+    border-radius: var(--border-radius);
+    padding: 2rem 1.5rem;
+}
+
+.auth-form .form-action button {
+    display: block;
+    margin: 0 auto;
 }

@@ -1,17 +1,20 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../auth"
+import './SignUpForm.css'
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
 
 
 export const SignUpForm = () => {
 
-  const [username, setUsername] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const authContext = useAuth();
   const navigate = useNavigate();
 
-  const handleSignup = async(event: React.FormEvent<HTMLFormElement>) => { 
+  const handleSignup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
@@ -28,29 +31,37 @@ export const SignUpForm = () => {
       };
 
     }
+  }
+
+  const invertVisibility = () => { 
+    setShowPassword(!showPassword);
    }
 
   return (
-    <div>
+    <div className="auth-form">
       <form onSubmit={handleSignup}>
 
-        <div className="form-control">
-          <label htmlFor="username">Nombre de usuario</label>
-          <input type="text" value={username} id="username" onChange={(event) => setUsername(event.currentTarget.value)} />
-        </div>
-        <div className="form-control">
-          <label htmlFor="email">Email</label>
-          <input type="email" value={email} id="email" onChange={(event) => setEmail(event.currentTarget.value)} />
-        </div>
+        <h2>Registro</h2>
 
         <div className="form-control">
-          <label htmlFor="password">Contraseña</label>
-          <input type="password" value={password} id="password" onChange={(event) => setPassword(event.currentTarget.value)} />
+          <input type="text" value={username} id="username" onChange={(event) => setUsername(event.currentTarget.value)} required placeholder="nombre de usuario" />
+        </div>
+        <div className="form-control">
+          <input type="email" value={email} id="email" onChange={(event) => setEmail(event.currentTarget.value)} required placeholder="correo@email.com" />
         </div>
 
-        <button type="submit">
-          Registrarse
-        </button>
+        <div className="form-control input-password">
+          <input type={ showPassword ? 'text' : 'password' } value={password} id="password" onChange={(event) => setPassword(event.currentTarget.value)} placeholder="contraseña" required />
+          {
+            showPassword ? (<IoEyeOffOutline onClick={ invertVisibility } />) : (<IoEyeOutline onClick={ invertVisibility } />)
+          }
+        </div>
+
+        <div className="form-action">
+          <button type="submit" className="submit">
+            Registrarse
+          </button>
+        </div>
 
       </form>
 

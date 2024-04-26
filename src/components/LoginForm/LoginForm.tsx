@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../auth";
+import './LoginForm.css'
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 
 export const LoginForm = () => {
@@ -8,6 +10,7 @@ export const LoginForm = () => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const authContext = useAuth();
   const navigate = useNavigate();
 
@@ -32,23 +35,32 @@ export const LoginForm = () => {
 
   }
 
+  const invertVisibility = () => { 
+    setShowPassword(!showPassword);
+   }
+
   return (
-    <div>
+    <div className="auth-form">
       <form onSubmit={handleLoging}>
 
-        <div className="form-control">
-          <label htmlFor="email">Email</label>
-          <input type="email" value={email} id="email" onChange={(event) => setEmail(event.currentTarget.value)} />
-        </div>
+        <h2>Inicio de sesión</h2>
 
         <div className="form-control">
-          <label htmlFor="password">Contraseña</label>
-          <input type="password" value={password} id="password" onChange={(event) => setPassword(event.currentTarget.value)} />
+          <input type="email" value={email} id="email" onChange={(event) => setEmail(event.currentTarget.value)} placeholder="correo@email.com" required />
         </div>
 
-        <button type="submit">
-          Iniciar sesion
-        </button>
+        <div className="form-control input-password">
+          <input type={ showPassword ? 'text' : 'password' } value={password} id="password" onChange={(event) => setPassword(event.currentTarget.value)} placeholder="contraseña" required />
+          {
+            showPassword ? (<IoEyeOffOutline onClick={ invertVisibility } />) : (<IoEyeOutline onClick={ invertVisibility } />)
+          }
+        </div>
+
+        <div className="form-action">
+          <button type="submit" className="submit">
+            Iniciar sesión
+          </button>
+        </div>
 
       </form>
 
