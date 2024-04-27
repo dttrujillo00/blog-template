@@ -6,7 +6,7 @@ export const ProtectedRoute = () => {
 
     const authContext = useAuth();
 
-    if (!authContext?.session) {
+    if (!authContext.session) {
         return <Navigate to={'/login'} />;
     }
 

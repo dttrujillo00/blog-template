@@ -16,13 +16,11 @@ export const HomePage = () => {
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
   const [alertContent, setAlertContent] = useState<string>("")
 
-  if (authContext) {
-    session = authContext.session;
-  }
+  session = authContext.session;
 
-  const handleAddArticle = () => { 
+  const handleAddArticle = () => {
     setShowAddModal(true)
-   }
+  }
 
   return (
     <div>

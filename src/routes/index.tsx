@@ -51,7 +51,7 @@ const Routes = () => {
   ];
 
   const router = createBrowserRouter([
-    ...(!authContext?.session ? routesForNotAuthenticatedOnly : []),
+    ...(!authContext.session ? routesForNotAuthenticatedOnly : []),
     ...routesForAuthenticatedOnly,
   ])
 

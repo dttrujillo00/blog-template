@@ -7,18 +7,30 @@ interface AuthProviderProps {
 
 interface IAuthContext {
     session: Session | null;
-    updateSession: () => Promise<void>;
-    signin: (email: string, password: string) => Promise<void>;
-    signout: () => Promise<void>;
-    signup: (username: string, email: string, password: string) => Promise<void>;
+    updateSession?: () => Promise<void>;
+    signin?: (email: string, password: string) => Promise<void>;
+    signout?: () => Promise<void>;
+    signup?: (username: string, email: string, password: string) => Promise<void>;
 }
 
+let initialContext: IAuthContext = {
+    session: null
+};
+
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY);
-const AuthContext = createContext<IAuthContext | null>(null);
+const AuthContext = createContext<IAuthContext>(initialContext);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
 
-    const [session, setSession] = useState<Session | null>(null)
+    // Aqui obtengo la sesión del localStorage
+    const sessionStorage: string | null = localStorage.getItem('sb-mzyesocfxknxvnsvfldg-auth-token');
+
+    // Si existe la sesión, la almaceno en la variable inicializadora del estado de sesión
+    // Si no existe inicialiozar con null
+    const mySession: Session | null = sessionStorage ? JSON.parse(sessionStorage) : null;
+
+    const [session, setSession] = useState<Session | null>(mySession)
+    console.log(session)
 
 
 
