@@ -60,6 +60,22 @@ ul  ul {
     max-width: 100%;
 }
 
+.image-article {
+    width: 80%;
+    margin: 1rem auto;
+}
+
+.image-article img {
+    display: block;
+    width: 100%;
+}
+
+.image-article figcaption {
+    font-style: italic;
+    font-size: .8rem;
+    margin-top: .3rem;
+}
+
 .form-control,
 .form-action {
     margin-bottom: 1rem;

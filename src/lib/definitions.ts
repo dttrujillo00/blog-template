@@ -9,4 +9,11 @@ export type Article = {
     image_src: string
 }
 
+export type AddBlockElement = {
+    type: string,
+    text: string;
+}
+
 export type ArticlesCollection = Article[];
+
+export type AddBlockElementCollection = AddBlockElement[];

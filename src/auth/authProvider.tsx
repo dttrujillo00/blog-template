@@ -30,7 +30,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const mySession: Session | null = sessionStorage ? JSON.parse(sessionStorage) : null;
 
     const [session, setSession] = useState<Session | null>(mySession)
-    console.log(session)
 
 
 
