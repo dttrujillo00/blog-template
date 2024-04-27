@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
+    list-style: none;
 }
 
 :root {
@@ -33,6 +34,10 @@ textarea:focus {
 a {
     color: inherit;
     text-decoration-color: rgb(145, 159, 237);
+}
+
+ul  ul {
+    padding-left: 1rem;
 }
 
 .flex-30 {

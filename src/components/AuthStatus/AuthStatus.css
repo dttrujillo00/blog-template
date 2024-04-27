@@ -1,5 +1,11 @@
 
 
+.box-auth-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .box-user {
     display: flex;
     align-items: center;

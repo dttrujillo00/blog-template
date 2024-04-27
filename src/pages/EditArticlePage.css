@@ -1,0 +1,42 @@
+
+
+.edit-article-page {
+    position: relative;
+}
+
+.content {
+    background-color: rgb(255, 0, 0);
+    height: 100vh;
+    z-index: 1;
+}
+
+.control {
+    background-color: rgb(0, 0, 255);
+    position: absolute;
+    top: 0;
+    right: -100%;
+    z-index: 2;
+    height: 100vh;
+    transition: all .5s;
+}
+
+.control.show {
+    right: 0;
+}
+
+.gear-icon,
+.close-icon {
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.article-body,
+.control-panel {
+    padding: 0 1rem;
+}
+
+.control-panel h3 {
+    margin-bottom: .5rem;
+}
