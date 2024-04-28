@@ -28,7 +28,7 @@ const addHeader = (contentRef: React.RefObject<HTMLDivElement>, content: string,
       let header = document.createElement(type)
       header.innerText = content;
       contentRef.current.appendChild(header)
-      console.log(contentRef.current.childNodes)
+      updateUI(contentRef.current.childNodes)
     }
    }
 
@@ -37,7 +37,7 @@ const addHeader = (contentRef: React.RefObject<HTMLDivElement>, content: string,
       let paragraph = document.createElement('p')
       paragraph.innerText = content;
       contentRef.current.appendChild(paragraph)
-      console.log(contentRef.current.childNodes)
+      updateUI(contentRef.current.childNodes)
     }
   }
 
@@ -48,7 +48,7 @@ const addHeader = (contentRef: React.RefObject<HTMLDivElement>, content: string,
       link.href = href;
       link.target ='_blank'
       contentRef.current.appendChild(link)
-      console.log(contentRef.current.childNodes)
+      updateUI(contentRef.current.childNodes)
     }
   }
 
@@ -65,9 +65,15 @@ const addHeader = (contentRef: React.RefObject<HTMLDivElement>, content: string,
       figure.appendChild(image)
       figure.appendChild(figcaption)
       contentRef.current.appendChild(figure)
-      console.log(contentRef.current.childNodes)
+      updateUI(contentRef.current.childNodes)
     }
    }
+
+   const updateUI = (childNodes: NodeListOf<ChildNode>) => { 
+    childNodes.forEach((node) => {
+      console.log(node.nodeName)
+    })
+    }
 
    export const AddContentToDOM = {
     addHeader,

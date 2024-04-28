@@ -1,7 +1,7 @@
 
 import { GoGear } from 'react-icons/go'
 import './EditArticlePage.css'
-import { useRef, useState } from 'react'
+import { useRef, useState } from 'react';
 import { AddBlockbutton, Box, FormAddBlock } from '../components'
 import { blockElements } from '../data/blockElements'
 import { AddBlockModal } from '../lib/definitions'
@@ -16,6 +16,7 @@ export const EditArticlePage = () => {
   });
   // const [alertContent, setAlertContent] = useState<string>("")
   const contentRef = useRef<HTMLDivElement>(null);
+  
 
   const showHidePanel = () => {
     setShowControl(!showControl)
@@ -28,7 +29,7 @@ export const EditArticlePage = () => {
       <FormAddBlock contentRef={contentRef} showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
 
       <div className="content">
-        <Box className="header bg-main-color">
+        <Box className="header bg-main-color position-sticky">
           <button className='submit'>
             Guardar
           </button>

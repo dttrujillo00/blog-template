@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { AddBlockModal, AddContentToDOM } from "../../lib/definitions"
 
 interface Props {
@@ -9,6 +9,9 @@ interface Props {
 export const FormAddImg = ({ contentRef, setShowAddModal }: Props) => {
 
     const [imagedescription, setImageDescription] = useState<string>('');
+    const [file, setFile] = useState<File>();
+
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const { addImage } = AddContentToDOM;
 
     const handleImgDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,11 +25,29 @@ export const FormAddImg = ({ contentRef, setShowAddModal }: Props) => {
         }))
     }
 
+    const handleUploadClick = () => {
+        inputRef.current?.click()
+    }
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+
+        if (!event.currentTarget.files) {
+            return;
+        }
+
+        setFile(event.currentTarget.files[0]);
+
+    }
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        addImage(contentRef, imagedescription, '/images/habana-background.jpg');
-        hideModal()
+        if (file) {
+            addImage(contentRef, imagedescription, URL.createObjectURL(file));
+            hideModal()
+
+        }
 
     }
 
@@ -37,10 +58,21 @@ export const FormAddImg = ({ contentRef, setShowAddModal }: Props) => {
                 <h2>Agregar imagen</h2>
 
                 <div className="form-control">
-                    <input value={imagedescription} onChange={handleImgDescription} type="text" placeholder="Descrpción" required />
+                    <input value={imagedescription} onChange={handleImgDescription} type="text" placeholder="Descrpción" />
+                </div>
+                <div onClick={handleUploadClick} className="form-control">
+                    <button className="submit">
+                        {file ? `${file.name}` : 'Elegir imagen'}
+                    </button>
                 </div>
                 <div className="form-control">
-                    <input type="file" accept="image/*" />
+                    <input
+                        type="file"
+                        ref={inputRef}
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                    />
                 </div>
 
                 <div className="form-action justify-end">

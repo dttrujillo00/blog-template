@@ -40,6 +40,12 @@ ul  ul {
     padding-left: 1rem;
 }
 
+.position-sticky {
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+
 .flex-30 {
     flex: 0 0 30%;
     max-width: 30%;
