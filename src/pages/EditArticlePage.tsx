@@ -2,7 +2,7 @@
 import { GoGear } from 'react-icons/go'
 import './EditArticlePage.css'
 import { useRef, useState } from 'react'
-import { AddBlockbutton, Box, FormAddBlock, LoadingAlert } from '../components'
+import { AddBlockbutton, Box, FormAddBlock } from '../components'
 import { blockElements } from '../data/blockElements'
 import { AddBlockModal } from '../lib/definitions'
 import { FaArrowRight } from 'react-icons/fa'
@@ -14,7 +14,7 @@ export const EditArticlePage = () => {
     show: false,
     type: ''
   });
-  const [alertContent, setAlertContent] = useState<string>("")
+  // const [alertContent, setAlertContent] = useState<string>("")
   const contentRef = useRef<HTMLDivElement>(null);
 
   const showHidePanel = () => {
@@ -23,7 +23,7 @@ export const EditArticlePage = () => {
 
   return (
     <div className="edit-article-page">
-      <LoadingAlert content={alertContent} />
+      {/* <LoadingAlert content={alertContent} /> */}
 
       <FormAddBlock contentRef={contentRef} showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
 
@@ -64,21 +64,6 @@ export const EditArticlePage = () => {
                 }
               </ul>
             </li>
-            {/* <li>
-              <AddBlockbutton type='p' setShowAddModal={setShowAddModal} setShowControl={setShowControl} >
-                Párrafo
-              </AddBlockbutton>
-            </li>
-            <li>
-              <AddBlockbutton type='img' setShowAddModal={setShowAddModal} setShowControl={setShowControl} >
-                Imagen
-              </AddBlockbutton>
-            </li>
-            <li>
-              <AddBlockbutton type='a' setShowAddModal={setShowAddModal} setShowControl={setShowControl} >
-                Enlace
-              </AddBlockbutton>
-            </li> */}
             {
                blockElements.map( (element) => {
                 if (!element.type.startsWith('h')) {
