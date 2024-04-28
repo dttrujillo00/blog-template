@@ -76,6 +76,13 @@ ul  ul {
     margin-top: .3rem;
 }
 
+form {
+    background-color: var(--main-color);
+    color: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+}
+
 .form-control,
 .form-action {
     margin-bottom: 1rem;
@@ -111,11 +118,50 @@ input[type="password"]::-ms-clear {
   display: none;
 }
 
+.form-action {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+button {
+    padding: .2rem .5rem;
+    background-color: transparent;
+    border: none;
+    color: inherit;
+}
+
 button.submit {
     background-color: white !important;
     color: var(--main-color) !important;
     border-radius: var(--border-radius) !important;
     font-weight: bold !important;
+}
+
+.screen-cover {
+    background-color: rgba(0, 0, 0, .5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom-in {
+    transform: scale(0);
+    animation: zoom-in .2s ease-in forwards;
 }
 
 /* Auth Page */
@@ -127,14 +173,12 @@ button.submit {
     align-items: center;
 }
 
-.auth-form {
-    background-color: var(--main-color);
-    color: white;
-    border-radius: var(--border-radius);
-    padding: 2rem 1.5rem;
-}
+@keyframes zoom-in {
+    from {
+        transform: scale(0);
+    }
 
-.auth-form .form-action button {
-    display: block;
-    margin: 0 auto;
+    to {
+        transform: scale(1);
+    }
 }

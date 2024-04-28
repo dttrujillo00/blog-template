@@ -7,14 +7,18 @@ interface AuthProviderProps {
 
 interface IAuthContext {
     session: Session | null;
-    updateSession?: () => Promise<void>;
-    signin?: (email: string, password: string) => Promise<void>;
-    signout?: () => Promise<void>;
-    signup?: (username: string, email: string, password: string) => Promise<void>;
+    updateSession: () => Promise<void> | void;
+    signin: (email: string, password: string) => Promise<void> | void;
+    signout: () => Promise<void> | void;
+    signup: (username: string, email: string, password: string) => Promise<void> | void;
 }
 
 let initialContext: IAuthContext = {
-    session: null
+    session: null,
+    updateSession: () => {},
+    signin: (email: string, password: string) => {},
+    signout: () => {},
+    signup: (username: string, email: string, password: string) => {}
 };
 
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY);

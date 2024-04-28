@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import './FormAddArticle.css'
 
 interface FormAddArticleProps {
     showAddModal: boolean;
@@ -24,8 +23,8 @@ export const FormAddArticle = ({ showAddModal, setShowAddModal, setAlertContent 
     if (showAddModal) {
         return (
             <div className='screen-cover'>
-                <form onSubmit={handleAddArticle} className='form-add-article'>
-                    <h3>Agregar nuevo artículo</h3>
+                <form onSubmit={handleAddArticle} className='zoom-in'>
+                    <h2>Agregar nuevo artículo</h2>
     
                     <div className="form-control">
                         <input type="text" placeholder='Título' autoFocus required />
@@ -35,7 +34,7 @@ export const FormAddArticle = ({ showAddModal, setShowAddModal, setAlertContent 
                         <textarea cols={30} rows={3} placeholder='Descripción' required></textarea>
                     </div>
     
-                    <div className="form-actions">
+                    <div className="form-action justify-end">
                         <button onClick={ () => setShowAddModal(false) }>
                             Cancelar
                         </button>

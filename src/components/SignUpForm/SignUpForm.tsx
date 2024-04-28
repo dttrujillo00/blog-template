@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../auth"
-import './SignUpForm.css'
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
 
 
@@ -57,15 +56,15 @@ export const SignUpForm = () => {
           }
         </div>
 
-        <div className="form-action">
+        <div className="form-action justify-center">
           <button type="submit" className="submit">
             Registrarse
           </button>
         </div>
 
+        <p>¿Ya tienes cuenta? <Link to={'/login'}>Inicia sesión</Link></p>
       </form>
 
-      <p>¿Ya tienes cuenta? <Link to={'/login'}>Inicia sesión</Link></p>
     </div>
   )
 }

@@ -29,14 +29,6 @@
     right: 0;
 }
 
-.gear-icon,
-.close-icon {
-    padding: .5rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
 .article-body,
 .control-panel {
     padding: 0 1rem;
