@@ -70,9 +70,7 @@ const addHeader = (contentRef: React.RefObject<HTMLDivElement>, content: string,
    }
 
    const updateUI = (childNodes: NodeListOf<ChildNode>) => { 
-    childNodes.forEach((node) => {
-      console.log(node.nodeName)
-    })
+    console.log(childNodes)
     }
 
    export const AddContentToDOM = {
