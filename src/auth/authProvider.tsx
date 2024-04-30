@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { createClient, Session } from '@supabase/supabase-js'
+import { Session } from '@supabase/supabase-js'
+import { supabase } from "../core/Supabase/supabaseClient";
 
 interface AuthProviderProps {
     children?: React.ReactNode;
@@ -21,7 +22,6 @@ let initialContext: IAuthContext = {
     signup: (username: string, email: string, password: string) => {}
 };
 
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL, import.meta.env.VITE_SUPABASE_KEY);
 const AuthContext = createContext<IAuthContext>(initialContext);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {

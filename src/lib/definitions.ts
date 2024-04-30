@@ -2,11 +2,12 @@
 
 export type Article = {
     article_id: number;
+    user_id: string;
     title: string;
     description: string;
     author: string;
-    date: string;
-    image_src: string
+    created_at: string;
+    main_image_path: string
 }
 
 export type AddBlockElement = {
