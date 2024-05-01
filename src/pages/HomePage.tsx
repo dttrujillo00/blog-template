@@ -35,8 +35,7 @@ export const HomePage = () => {
             console.log(error);
             return
           }
-
-          console.log(data)
+          
           setAlertContent("");
           setArticlesData(data as ArticlesCollection)
 

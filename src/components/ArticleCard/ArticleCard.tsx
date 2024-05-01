@@ -4,7 +4,6 @@ import './ArticleCard.css'
 import { useEffect, useState } from 'react';
 
 export const ArticleCard: React.FC<Article> = ({
-  user_id,
   title,
   description,
   author,
@@ -12,25 +11,58 @@ export const ArticleCard: React.FC<Article> = ({
   main_image_path
 }) => {
 
-  const [srcImage, setSrcImage] = useState<string>("")
-  let created = new Date().getDate() - new Date(created_at).getDate()
+  const [srcImage, setSrcImage] = useState<string>("");
+  const [dateOfPublic, setDateOfPublic] = useState<string>("")
 
   useEffect(() => {
+
+    setDateOfPublic(getCreatedAt(created_at))
     createURL()
-  
+
   }, [])
 
-  const createURL = async() => { 
+  const createURL = async () => {
     const { data, error } = await supabase.storage.from('article_images').createSignedUrl(main_image_path, 3600)
-    console.log(data, error)
     if (data?.signedUrl) {
       setSrcImage(data.signedUrl)
     }
-   }
-  
+  }
 
-  // https://mzyesocfxknxvnsvfldg.supabase.co/storage/v1/object/sign/article_images/a2c236e4-c285-4ee1-8387-96d02f15e412/main_images/Articulo%201?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhcnRpY2xlX2ltYWdlcy9hMmMyMzZlNC1jMjg1LTRlZTEtODM4Ny05NmQwMmYxNWU0MTIvbWFpbl9pbWFnZXMvQXJ0aWN1bG8gMSIsImlhdCI6MTcxNDQ5OTM0MSwiZXhwIjoxNzE1MTA0MTQxfQ.HxD8fI07XuaDa5CtJkFyK6dFxILFET4JcZAs7LXfhT8&t=2024-04-30T17%3A49%3A01.608Z
+  const getCreatedAt = (created_at: string): string => {
 
+    let today: Date = new Date()
+    let createdDate: Date = new Date(created_at)
+    let createdAt: string = "";
+
+    if (today.getFullYear() > createdDate.getFullYear()) {
+
+      (today.getFullYear() - createdDate.getFullYear() > 1) ?
+        createdAt = `Publicado hace ${today.getFullYear() - createdDate.getFullYear()} años`
+        :
+        createdAt = 'Publicado el año pasado'
+
+    } else if (today.getMonth() > createdDate.getMonth()) {
+
+      (today.getMonth() - createdDate.getMonth() > 1) ?
+        createdAt = `Publicado hace ${today.getFullYear() - createdDate.getFullYear()} meses`
+        :
+        createdAt = 'Publicado el mes pasado'
+
+    } else if (today.getDate() > createdDate.getDate()) {
+
+      (today.getDate() - createdDate.getDate() > 1) ?
+        createdAt = `Publicado hace ${today.getFullYear() - createdDate.getFullYear()} días`
+        :
+        createdAt = 'Publicado ayer'
+
+    } else {
+
+      return "Publicado hoy";
+
+    }
+
+    return createdAt
+  }
 
   return (
     <div className='article-card'>
@@ -41,7 +73,7 @@ export const ArticleCard: React.FC<Article> = ({
 
         <div className="author-date">
           <small>{author}</small>
-          <small>Hace {created} días</small>
+          <small>{dateOfPublic}</small>
         </div>
       </div>
     </div>
