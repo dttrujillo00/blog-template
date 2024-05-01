@@ -34,7 +34,7 @@ export const ArticleCard: React.FC<Article> = ({
 
   return (
     <div className='article-card'>
-      <img src={srcImage} alt="Foto del artículo" />
+      <img src={srcImage} alt={`Imagen de presentación de ${title}`} />
       <div className="metadata-article">
         <h3>{title}</h3>
         <p>{description}</p>

@@ -1,15 +1,10 @@
-import { Session } from "@supabase/supabase-js";
 import { useAuth } from "../auth";
 import { ArticleCard, AuthStatus, Box, FormAddArticle, LoadingAlert, Logo } from "../components"
-// import { articles } from "../data/articles"
 import { ArticlesCollection } from "../lib/definitions";
 import './HomePage.css'
 import { IoAdd } from "react-icons/io5";
 import { useState, useEffect } from 'react';
 import { loadArticles } from "../core/services/loadArticles";
-
-// let articlesData: ArticlesCollection = articles;
-let session: Session | null;
 
 export const HomePage = () => {
 
@@ -21,31 +16,34 @@ export const HomePage = () => {
   useEffect(() => {
 
     initialLoad()
-    
-    
+
+
   }, [])
-  
-  
-  session = authContext.session;
-  
-  const initialLoad = () => { 
-    setAlertContent("Cargando articulos");
-    loadArticles()
-    .then( ({ data, error }) => {
 
-      // Si hay error mostrar en consola
-      if (error) {
-        console.log(error);
-        return
-      }
+  const initialLoad = () => {
 
-      console.log(data)
-      setAlertContent("");
-      setArticlesData(data as ArticlesCollection)
+    if (authContext.session) {
 
-    } )
 
-   }
+      setAlertContent("Cargando articulos");
+
+      loadArticles(authContext.session.user.id)
+        .then(({ data, error }) => {
+
+          // Si hay error mostrar en consola
+          if (error) {
+            console.log(error);
+            return
+          }
+
+          console.log(data)
+          setAlertContent("");
+          setArticlesData(data as ArticlesCollection)
+
+        })
+    }
+
+  }
 
   const handleAddArticle = () => {
     setShowAddModal(true)
@@ -78,7 +76,7 @@ export const HomePage = () => {
           {
             articlesData.map((article) => (
               <Box key={article.article_id} className="flex-100 height-article-card">
-                <ArticleCard {...article} author={session?.user.user_metadata.username} />
+                <ArticleCard {...article} author={authContext.session?.user.user_metadata.username} />
               </Box>
             ))
           }

@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { uploadFile } from '../../core/Supabase/uploadFile';
 import { useAuth } from '../../auth';
 import { createNewArticle } from '../../core/Supabase/createArticle';
@@ -13,7 +12,6 @@ interface FormAddArticleProps {
 
 export const FormAddArticle = ({ showAddModal, setShowAddModal, setAlertContent, initialLoad }: FormAddArticleProps) => {
 
-    const navigate = useNavigate()
     const [file, setFile] = useState<File>();
     const [title, setTitle] = useState<string>('')
     const [description, setDescription] = useState<string>('')
@@ -26,7 +24,6 @@ export const FormAddArticle = ({ showAddModal, setShowAddModal, setAlertContent,
 
         if (authContext.session) {
             setAlertContent("Creando articulo");
-            // navigate('/edit-article/1')
             console.log(title)
             console.log(description)
             console.log(file)
