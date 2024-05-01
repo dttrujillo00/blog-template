@@ -4,10 +4,13 @@
     height: 100%;
     max-width: 100%;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
     overflow: hidden;
 }
+
 
 .article-card img {
     position: absolute;
@@ -16,6 +19,24 @@
     transform: translatex(-50%);
     height: 100%;
     z-index: -1;
+}
+
+.article-card .actions {
+    align-self: self-end;
+    padding: .5rem;
+    opacity: 0;
+    transition: all .5s;
+}
+
+.article-card:hover .actions {
+    opacity: 1;
+}
+
+.article-card .actions button {
+    margin-right: .5rem;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
 }
 
 .article-card .metadata-article {

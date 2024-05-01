@@ -152,6 +152,13 @@ button.submit {
     font-weight: bold !important;
 }
 
+button.delete {
+    background-color: rgb(198, 46, 46) !important;
+    color: white !important;
+    border-radius: var(--border-radius) !important;
+    font-weight: bold !important;
+}
+
 .screen-cover {
     background-color: rgba(0, 0, 0, .5);
     width: 100vw;

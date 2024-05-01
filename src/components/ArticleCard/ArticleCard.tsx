@@ -2,6 +2,7 @@ import { supabase } from '../../core/Supabase/supabaseClient'
 import { Article } from '../../lib/definitions'
 import './ArticleCard.css'
 import { useEffect, useState } from 'react';
+import { TfiTrash, TfiWrite } from 'react-icons/tfi';
 
 export const ArticleCard: React.FC<Article> = ({
   title,
@@ -67,6 +68,14 @@ export const ArticleCard: React.FC<Article> = ({
   return (
     <div className='article-card'>
       <img src={srcImage} alt={`Imagen de presentación de ${title}`} />
+      <div className="actions">
+        <button className='submit'>
+          <TfiWrite size={15} />
+        </button>
+        <button className='delete'>
+          <TfiTrash size={15} />
+        </button>
+      </div>
       <div className="metadata-article">
         <h3>{title}</h3>
         <p>{description}</p>
