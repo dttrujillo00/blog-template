@@ -18,7 +18,7 @@ const Routes = () => {
           element: <HomePage />
         },
         {
-          path: "edit-article/:article_id",
+          path: "edit-article/:articleTitle",
           element: <EditArticlePage />
         },
       ]

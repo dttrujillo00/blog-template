@@ -1,8 +1,9 @@
+import { FaPencil, FaTrash } from 'react-icons/fa6';
 import { supabase } from '../../core/Supabase/supabaseClient'
 import { Article } from '../../lib/definitions'
 import './ArticleCard.css'
 import { useEffect, useState } from 'react';
-import { TfiTrash, TfiWrite } from 'react-icons/tfi';
+import { useNavigate } from 'react-router-dom';
 
 export const ArticleCard: React.FC<Article> = ({
   title,
@@ -14,6 +15,7 @@ export const ArticleCard: React.FC<Article> = ({
 
   const [srcImage, setSrcImage] = useState<string>("");
   const [dateOfPublic, setDateOfPublic] = useState<string>("")
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -23,7 +25,7 @@ export const ArticleCard: React.FC<Article> = ({
   }, [])
 
   const createURL = async () => {
-    const { data, error } = await supabase.storage.from('article_images').createSignedUrl(main_image_path, 3600)
+    const { data } = await supabase.storage.from('article_images').createSignedUrl(main_image_path, 3600)
     if (data?.signedUrl) {
       setSrcImage(data.signedUrl)
     }
@@ -65,15 +67,23 @@ export const ArticleCard: React.FC<Article> = ({
     return createdAt
   }
 
+  const editAction = () => { 
+    navigate(`/edit-article/${title}`)
+   }
+
+   const deleteAction = () => { 
+    console.log('Show alert before delete')
+    }
+
   return (
     <div className='article-card'>
       <img src={srcImage} alt={`Imagen de presentación de ${title}`} />
       <div className="actions">
-        <button className='submit'>
-          <TfiWrite size={15} />
+        <button onClick={editAction} className='submit'>
+          <FaPencil size={15} />
         </button>
-        <button className='delete'>
-          <TfiTrash size={15} />
+        <button onClick={deleteAction} className='delete'>
+          <FaTrash size={15} />
         </button>
       </div>
       <div className="metadata-article">

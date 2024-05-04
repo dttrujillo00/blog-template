@@ -11,7 +11,7 @@ export type Article = {
 }
 
 export type AddBlockElement = {
-    type: string,
+    type: string;
     text: string;
 }
 
@@ -19,6 +19,37 @@ export type AddBlockModal = {
     show: boolean;
     type: string;
 }
+
+export type CustomParagraph = {
+  article_id: string;
+  textContent: string;
+  index: number;
+}
+
+export type CustomHeading = {
+  article_id: string;
+  textContent: string;
+  index: number;
+}
+
+export type CustomImg = {
+  article_id: string;
+  src: string;
+  index: number;
+  descrption: string;
+}
+
+export type CustomLink = {
+  article_id: string;
+  href: string;
+  index: number;
+  textContent: string;
+}
+
+export type ParagarphCollection = CustomParagraph[];
+export type HeadingCollection = CustomHeading[];
+export type ImgCollection = CustomImg[];
+export type LinkCollection = CustomLink[];
 
 export type ArticlesCollection = Article[];
 

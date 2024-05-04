@@ -1,22 +1,47 @@
 
 import { GoGear } from 'react-icons/go'
 import './EditArticlePage.css'
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AddBlockbutton, Box, FormAddBlock } from '../components'
 import { blockElements } from '../data/blockElements'
 import { AddBlockModal } from '../lib/definitions'
 import { FaArrowRight } from 'react-icons/fa'
+import { getArticleById } from '../core/services';
+import { useAuth } from '../auth';
+import { useParams } from 'react-router-dom';
 
 export const EditArticlePage = () => {
 
+  const [article, setArticle] = useState<any | null>(null)
   const [showControl, setShowControl] = useState<boolean>(false);
   const [showAddModal, setShowAddModal] = useState<AddBlockModal>({
     show: false,
     type: ''
   });
-  // const [alertContent, setAlertContent] = useState<string>("")
+
   const contentRef = useRef<HTMLDivElement>(null);
-  
+  const authContext = useAuth()
+  const { articleTitle } = useParams()
+
+  useEffect(() => {
+
+    if (authContext.session && articleTitle) {
+
+      getArticleById(articleTitle, authContext.session?.user.id)
+        .then(({ data, error }) => {
+          if (data && data.length > 0) {
+            setArticle(data[0])
+          }
+
+          if (error) {
+            console.log(error)
+          }
+        })
+    }
+
+  }, [])
+
+
 
   const showHidePanel = () => {
     setShowControl(!showControl)
@@ -36,7 +61,9 @@ export const EditArticlePage = () => {
           <GoGear onClick={showHidePanel} size={26} />
         </Box>
         <div ref={contentRef} className="article-body">
-          <h1>Título del artículo</h1>
+          {
+            article && <h1>{article.title}</h1>
+          }
         </div>
       </div>
 
@@ -66,17 +93,17 @@ export const EditArticlePage = () => {
               </ul>
             </li>
             {
-               blockElements.map( (element) => {
+              blockElements.map((element) => {
                 if (!element.type.startsWith('h')) {
                   return (
                     <li key={element.type}>
                       <AddBlockbutton type={element.type} setShowAddModal={setShowAddModal} setShowControl={setShowControl} >
-                        { element.text }
+                        {element.text}
                       </AddBlockbutton>
                     </li>
                   )
                 }
-              } )
+              })
             }
           </ul>
         </div>
