@@ -1,15 +1,15 @@
 import { useState } from "react"
-import { AddBlockModal, AddContentToDOM } from "../../lib/definitions"
+import { AddBlockModal } from "../../lib"
+import { useDOM } from "../../core/hooks/domProvider";
 
 interface Props {
-    contentRef: React.RefObject<HTMLDivElement>,
     setShowAddModal: React.Dispatch<React.SetStateAction<AddBlockModal>>
 }
 
-export const FormAddParagraph = ({ contentRef, setShowAddModal }: Props) => {
+export const FormAddParagraph = ({ setShowAddModal }: Props) => {
 
     const [paragraphText, setParagraphText] = useState<string>('');
-    const { addParagraph } = AddContentToDOM;
+    const { addParagraph } = useDOM();
 
     const handleTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setParagraphText(event.currentTarget.value)
@@ -25,7 +25,7 @@ export const FormAddParagraph = ({ contentRef, setShowAddModal }: Props) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        addParagraph(contentRef, paragraphText);
+        addParagraph(paragraphText);
         hideModal()
 
     }

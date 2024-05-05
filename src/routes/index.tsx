@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import { useAuth } from "../auth"
 import { LoginForm, ProtectedRoute, SignUpForm } from "../components"
 import { EditArticlePage, HomePage, NotAuthenticated } from "../pages"
+import { DomProvider } from '../core/hooks/domProvider';
 
 
 const Routes = () => {
@@ -19,7 +20,9 @@ const Routes = () => {
         },
         {
           path: "edit-article/:articleTitle",
-          element: <EditArticlePage />
+          element: <DomProvider>
+            <EditArticlePage />
+          </DomProvider>
         },
       ]
     },

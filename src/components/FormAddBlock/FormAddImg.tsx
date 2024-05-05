@@ -1,18 +1,18 @@
 import { useRef, useState } from "react"
-import { AddBlockModal, AddContentToDOM } from "../../lib/definitions"
+import { AddBlockModal } from "../../lib"
+import { useDOM } from "../../core/hooks/domProvider";
 
 interface Props {
-    contentRef: React.RefObject<HTMLDivElement>,
     setShowAddModal: React.Dispatch<React.SetStateAction<AddBlockModal>>
 }
 
-export const FormAddImg = ({ contentRef, setShowAddModal }: Props) => {
+export const FormAddImg = ({ setShowAddModal }: Props) => {
 
     const [imagedescription, setImageDescription] = useState<string>('');
     const [file, setFile] = useState<File>();
 
     const inputRef = useRef<HTMLInputElement | null>(null);
-    const { addImage } = AddContentToDOM;
+    const { addImg } = useDOM();
 
     const handleImgDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
         setImageDescription(event.currentTarget.value)
@@ -42,9 +42,10 @@ export const FormAddImg = ({ contentRef, setShowAddModal }: Props) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+        
         if (file) {
-            addImage(contentRef, imagedescription, URL.createObjectURL(file));
+            console.log(URL.createObjectURL(file))
+            addImg(imagedescription, URL.createObjectURL(file));
             hideModal()
 
         }

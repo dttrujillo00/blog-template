@@ -1,16 +1,16 @@
 import { useState } from "react"
-import { AddBlockModal, AddContentToDOM } from "../../lib/definitions"
+import { AddBlockModal } from "../../lib"
+import { useDOM } from "../../core/hooks/domProvider";
 
 interface Props {
-    contentRef: React.RefObject<HTMLDivElement>,
     setShowAddModal: React.Dispatch<React.SetStateAction<AddBlockModal>>
 }
 
-export const FormAddLink = ({ contentRef, setShowAddModal }: Props) => {
+export const FormAddLink = ({ setShowAddModal }: Props) => {
 
     const [linkText, setLinkText] = useState<string>('');
     const [linkHref, setLinkHref] = useState<string>('');
-    const { addLink } = AddContentToDOM;
+    const { addLink } = useDOM();
 
     const handleLinkText = (event: React.ChangeEvent<HTMLInputElement>) => {
         setLinkText(event.currentTarget.value)
@@ -31,7 +31,7 @@ export const FormAddLink = ({ contentRef, setShowAddModal }: Props) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        addLink(contentRef, linkText, linkHref);
+        addLink(linkText, linkHref);
         hideModal()
 
     }

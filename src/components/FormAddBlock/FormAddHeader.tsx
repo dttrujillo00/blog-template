@@ -1,16 +1,15 @@
 import { useState } from "react"
-import { AddBlockModal, AddContentToDOM } from "../../lib/definitions"
+import { AddBlockModal } from "../../lib"
+import { useDOM } from "../../core/hooks/domProvider";
 
 interface Props {
-    contentRef: React.RefObject<HTMLDivElement>;
     setShowAddModal: React.Dispatch<React.SetStateAction<AddBlockModal>>;
-    type: string;
 }
 
-export const FormAddHeader = ({ contentRef, setShowAddModal, type }: Props) => {
+export const FormAddHeader = ({ setShowAddModal }: Props) => {
 
     const [headerText, setHeaderText] = useState<string>('');
-    const { addHeader } = AddContentToDOM;
+    const { addHeader } = useDOM();
 
     const handleTextarea = (event: React.ChangeEvent<HTMLInputElement>) => {
         setHeaderText(event.currentTarget.value)
@@ -26,7 +25,7 @@ export const FormAddHeader = ({ contentRef, setShowAddModal, type }: Props) => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        addHeader(contentRef, headerText, type);
+        addHeader(headerText);
         hideModal()
 
     }

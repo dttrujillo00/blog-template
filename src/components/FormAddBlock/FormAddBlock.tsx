@@ -6,12 +6,11 @@ import { FormAddParagraph } from './FormAddParagraph';
 
 
 interface Props {
-    contentRef: React.RefObject<HTMLDivElement>,
     showAddModal: AddBlockModal;
     setShowAddModal: React.Dispatch<React.SetStateAction<AddBlockModal>>
 }
 
-export const FormAddBlock = ({ contentRef, showAddModal, setShowAddModal }: Props) => {
+export const FormAddBlock = ({ showAddModal, setShowAddModal }: Props) => {
 
     const { show, type } = showAddModal;
 
@@ -21,25 +20,25 @@ export const FormAddBlock = ({ contentRef, showAddModal, setShowAddModal }: Prop
                 <div className="screen-cover">
                     {
                         type === 'p' && (
-                            <FormAddParagraph contentRef={contentRef} setShowAddModal={setShowAddModal} />
+                            <FormAddParagraph setShowAddModal={setShowAddModal} />
                         )
                     }
 
                     {
-                        type.startsWith('h') && (
-                            <FormAddHeader contentRef={contentRef} setShowAddModal={setShowAddModal} type={type} />
+                        type === 'h' && (
+                            <FormAddHeader setShowAddModal={setShowAddModal} />
                         )
                     }
 
                     {
                         type === 'a' && (
-                            <FormAddLink contentRef={contentRef} setShowAddModal={setShowAddModal} />
+                            <FormAddLink setShowAddModal={setShowAddModal} />
                         )
                     }
 
                     {
                         type === 'img' && (
-                            <FormAddImg contentRef={contentRef} setShowAddModal={setShowAddModal} />
+                            <FormAddImg setShowAddModal={setShowAddModal} />
                         )
                     }
                 </div>
